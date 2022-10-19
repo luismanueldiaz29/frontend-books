@@ -26,7 +26,7 @@ const AuthorForm = () => {
     });
 
     return (
-        <Container alignContent="center" md>
+        <Container alignContent="center">
             <h3>Author form</h3>
             <FormProvider {...authorForm}>
                 <form onSubmit={handleSubmit}>
@@ -73,7 +73,9 @@ const AuthorForm = () => {
                     />
                 </form>
             </FormProvider>
+            <Spacer />
         </Container>
+        
     );
 }
 
