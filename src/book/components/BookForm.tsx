@@ -2,39 +2,40 @@ import { Container, Grid, Spacer } from '@nextui-org/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { InputForm } from '../../shared/common/InputForm';
 import { SubmitButton } from '../../shared/common/SubmitButton';
-import { AuthorModel } from '../models/author';
+import { BookModel } from '../models/book';
 
-const AuthorForm = () => {
-    const authorForm = useForm<any>({
+
+const BookForm = () => {
+    const BookForm = useForm<any>({
         mode: 'all',
         reValidateMode: 'onChange',
     });
 
-    const handleSubmit = authorForm.handleSubmit(async (event) => {
+    const handleSubmit = BookForm.handleSubmit(async (event) => {
         let resp: any = {};
 
         const data = {
-            name: event.name,
-            age: event.age,
-            gender: event.gender
+            author_id: event.author_id,
+            title: event.title,
+            rating: event.rating
         };
 
         console.log(data)
 
-        authorForm.reset();
+        BookForm.reset();
     });
 
     return (
         <Container alignContent="center" md>
-            <h3>Author form</h3>
-            <FormProvider {...authorForm}>
+            <h3>Book form</h3>
+            <FormProvider {...BookForm}>
                 <form onSubmit={handleSubmit}>
                     <Grid.Container alignItems="flex-end" justify="flex-end">
                         <Grid xs>
-                            <InputForm<AuthorModel>
-                                fieldForm="name"
-                                errorMessage="name is required"
-                                label="Name"
+                            <InputForm<BookModel>
+                                fieldForm="author_id"
+                                errorMessage="The author is required required"
+                                label="Author"
                                 type="text"
                                 required
                             />
@@ -43,10 +44,10 @@ const AuthorForm = () => {
                         <Spacer />
 
                         <Grid xs>
-                            <InputForm<AuthorModel>
-                                fieldForm="age"
-                                errorMessage="age is required"
-                                label="Age"
+                            <InputForm<BookModel>
+                                fieldForm="title"
+                                errorMessage="Title is required"
+                                label="Title"
                                 type="number"
                                 required
                             />
@@ -55,10 +56,10 @@ const AuthorForm = () => {
                         <Spacer />
 
                         <Grid xs>
-                            <InputForm<AuthorModel>
-                                fieldForm="gender"
-                                errorMessage="gender is required"
-                                label="gender"
+                            <InputForm<BookModel>
+                                fieldForm="rating"
+                                errorMessage="Rating is required"
+                                label="Rating"
                                 type="text"
                                 required
                             />
@@ -68,7 +69,7 @@ const AuthorForm = () => {
                     <Spacer />
 
                     <SubmitButton
-                        isSubmiting={authorForm.formState.isSubmitting}
+                        isSubmiting={BookForm.formState.isSubmitting}
                     />
                 </form>
             </FormProvider>
@@ -78,4 +79,4 @@ const AuthorForm = () => {
     );
 }
 
-export default AuthorForm;
+export default BookForm;
