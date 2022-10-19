@@ -1,38 +1,49 @@
-import { Card } from '@nextui-org/react';
-import { Table } from '@nextui-org/react';
-import { Container } from '@nextui-org/react';
+import { Table, useAsyncList } from '@nextui-org/react';
+import { getAllAuthor } from '../services/getAll';
 
 const columns = [
-  { name: '#', uid: 'id' },
-  { name: 'Nombre', uid: 'name' },
-  { name: 'Dirección', uid: 'address' },
-  { name: 'Código de habilitación', uid: 'enableCode' },
-  { name: 'Correo', uid: 'email' },
-  { name: 'Teléfono', uid: 'phone' },
+  { name: '#', uid: 'author_id' },
+  { name: 'name', uid: 'name' },
+  { name: 'age', uid: 'age' },
+  { name: 'gender', uid: 'gender' }
 ];
 
 const size = 8;
 
 export const AuthorTable = () => {
+  const load = async () => {
+    const results = await getAllAuthor();
+    return {
+      items: results,
+      cursor: results.length,
+    };
+  };
+
+  const list = useAsyncList({ load });
 
   return (
-    <Container alignContent="center" md>
-        <h3>Authors List</h3>
-        <Table
-        bordered
-        shadow={false}
-        aria-label="Tabla de sedes de ips"
-        css={{ minWidth: '100%', height: `calc($space$14 * ${size + 2})` }}
-        color="primary"
-        selectionMode="multiple"
-        >
-        <Table.Header columns={columns}>
-            {(column) => <Table.Column key={column.uid}>{column.name}</Table.Column>}
-        </Table.Header>
-        <Table.Body>
-
-        </Table.Body>
-        </Table>
-    </Container>
+    <Table
+      bordered
+      shadow={false}
+      aria-label="Tabla de eventos"
+      css={{ minWidth: '100%', height: `calc($space$14 * ${size + 2})` }}
+      color="primary"
+      selectionMode="multiple"
+    >
+      <Table.Header columns={columns}>
+        {(column) => <Table.Column key={column.uid}>{column.name}</Table.Column>}
+      </Table.Header>
+      <Table.Body
+        items={list.items}
+        loadingState={list.loadingState}
+        onLoadMore={list.loadMore}
+      >
+        {(item) => (
+          <Table.Row key={item.author_id}>
+            {(key) => <Table.Cell>{item[key]}</Table.Cell>}
+          </Table.Row>
+        )}
+      </Table.Body>
+    </Table>
   );
 };

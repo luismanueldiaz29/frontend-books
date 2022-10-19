@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { InputForm } from '../../shared/common/InputForm';
 import { SubmitButton } from '../../shared/common/SubmitButton';
 import { AuthorModel } from '../models/author';
+import { saveAuthor } from '../services/saveAuthor';
 
 const AuthorForm = () => {
     const authorForm = useForm<any>({
@@ -19,9 +20,12 @@ const AuthorForm = () => {
             gender: event.gender
         };
 
-        console.log(data)
+        resp = saveAuthor(data)
 
-        authorForm.reset();
+        console.log(resp)
+        if(resp != null){
+            authorForm.reset();
+        }
     });
 
     return (
