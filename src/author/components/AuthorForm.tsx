@@ -16,7 +16,7 @@ const AuthorForm = () => {
 
         const data = {
             name: event.name,
-            age: event.age,
+            age: Number.parseInt(event.age),
             gender: event.gender
         };
 
