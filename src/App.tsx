@@ -1,50 +1,48 @@
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
-  
+    Navbar,
+    Button,
+    Text,
+    Card,
+    Radio
+} from "@nextui-org/react";
+import Author from "./author/pages/Author";
+import Book from "./book/pages/book";
+import Home from "./home/home";
+
 function App() {
     return (
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/users">Users</Link>
-              </li>
-            </ul>
-          </nav>
-          <Routes>
+        <Router>
+            <div>
 
-            <Route path="/about" element={<About />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/" element={<Home />} />
+                <Navbar>
+                    <Navbar.Brand>
+                        <Text b color="inherit" hideIn="xs">
+                            Books Store
+                        </Text>
+                    </Navbar.Brand>
+                    <Navbar.Content hideIn="xs">
+                        <Link to="/">Home</Link>
+                        <Link to="/books">Books</Link>
+                        <Link to="/authors">Authors</Link>
+                    </Navbar.Content>
+                    <Navbar.Content></Navbar.Content>
+                </Navbar>
 
-          </Routes>
-        </div>
-      </Router>
+                <Routes>
+
+                    <Route path="/authors"
+                        element={<Author/>}/>
+                    <Route path="/books"
+                        element={<Book/>}/>
+                    <Route path="/"
+                        element={<Home/>}/>
+
+                </Routes>
+            </div>
+        </Router>
     );
-  }
-  
-  function Home() {
-    return <h2>Home</h2>;
-  }
-  
-  function About() {
-    return <h2>About</h2>;
-  }
-  
-  function Users() {
-    return <h2>Users</h2>;
-  }
-  
+}
+
 
 export default App;
