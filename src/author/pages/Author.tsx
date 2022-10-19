@@ -1,10 +1,11 @@
 import { Container, Spacer } from '@nextui-org/react';
+import AuthorForm from '../components/AuthorForm';
 
 const Author = () => {
 
     return(
         <Container css={{ paddingTop: '5%' }} alignContent="center" md>
-            <h1>Authors</h1>
+            <AuthorForm />
         </Container>
     );
 }
