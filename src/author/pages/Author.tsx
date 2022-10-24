@@ -1,4 +1,4 @@
-import { Container, Spacer } from '@nextui-org/react';
+import { Container } from '@nextui-org/react';
 import AuthorForm from '../components/AuthorForm';
 import { AuthorTable } from '../components/AuthorTable';
 

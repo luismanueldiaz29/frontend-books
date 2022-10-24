@@ -1,3 +1,14 @@
+# Install root
+npm install --global yarn
+yarn
+
+# execution root
+docker-compose build
+docker-compose up
+
+# execution locate react
+npm start
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

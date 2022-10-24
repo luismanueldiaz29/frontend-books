@@ -1,5 +1,5 @@
 export interface AuthorModel{
-    name: string;
-    age: number;
-    gender: string;
+    name: string,
+    age: number,
+    gender: string
 }

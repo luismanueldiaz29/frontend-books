@@ -22,10 +22,11 @@ const AuthorForm = () => {
 
         resp = saveAuthor(data)
 
-        console.log(resp)
         if(resp != null){
             authorForm.reset();
         }
+
+        window.location.reload();
     });
 
     return (
