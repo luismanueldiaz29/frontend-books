@@ -27,7 +27,7 @@ const AuthorForm = () => {
 
         if(resp != null){
             authorForm.reset();
-            reloadList();
+                    reloadList();
         }
     });
 
