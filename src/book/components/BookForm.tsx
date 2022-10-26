@@ -2,40 +2,40 @@ import { Container, Grid, Spacer } from '@nextui-org/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { InputForm } from '../../shared/common/InputForm';
 import { SubmitButton } from '../../shared/common/SubmitButton';
+import { useAsyncListStore } from '../../shared/hooks/useAsyncListStore';
 import { BookModel } from '../models/book';
 import { saveBook } from '../services/saveBook';
 
 
 const BookForm = () => {
-    const bookForm = useForm<any>({
+    const {reloadList} = useAsyncListStore();
+
+    const BookForm = useForm<any>({
         mode: 'all',
         reValidateMode: 'onChange',
     });
 
-    const handleSubmit = bookForm.handleSubmit(async (event) => {
+    const handleSubmit = BookForm.handleSubmit(async (event) => {
         let resp: any = {};
 
         const data = {
-            author_id: Number.parseInt(event.author_id),
+            author_id: event.author_id,
             title: event.title,
             rating: event.rating
         };
 
-        console.log(data)
-
         resp = saveBook(data)
 
         if(resp != null){
-            bookForm.reset();
+            reloadList();
+            BookForm.reset();
         }
-
-        window.location.reload();
     });
 
     return (
         <Container alignContent="center" md>
             <h3>Book form</h3>
-            <FormProvider {...bookForm}>
+            <FormProvider {...BookForm}>
                 <form onSubmit={handleSubmit}>
                     <Grid.Container alignItems="flex-end" justify="flex-end">
                         <Grid xs>
@@ -76,7 +76,7 @@ const BookForm = () => {
                     <Spacer />
 
                     <SubmitButton
-                        isSubmiting={bookForm.formState.isSubmitting}
+                        isSubmiting={BookForm.formState.isSubmitting}
                     />
                 </form>
             </FormProvider>

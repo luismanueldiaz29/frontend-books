@@ -1,4 +1,6 @@
 import { Table, useAsyncList } from '@nextui-org/react';
+import { useEffect } from 'react';
+import { useAsyncListStore } from '../../shared/hooks/useAsyncListStore';
 import { getAllBook } from '../services/getAll';
 
 const columns = [
@@ -12,6 +14,12 @@ const columns = [
 const size = 8;
 
 export const BookTable = () => {
+
+  const {setAsyncList} = useAsyncListStore();
+
+  useEffect(() => {
+    setAsyncList(list);
+  }, [])
 
   const load = async () => {
     const results = await getAllBook();

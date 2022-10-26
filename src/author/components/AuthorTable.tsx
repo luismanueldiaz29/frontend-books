@@ -1,4 +1,6 @@
 import { Table, useAsyncList } from '@nextui-org/react';
+import { useEffect } from 'react';
+import { useAsyncListStore } from '../../shared/hooks/useAsyncListStore';
 import { getAllAuthor } from '../services/getAll';
 
 const columns = [
@@ -18,6 +20,13 @@ export const AuthorTable = () => {
       cursor: results.length,
     };
   };
+
+  const {setAsyncList} = useAsyncListStore();
+
+  useEffect(() => {
+    setAsyncList(list);
+  }, [])
+
 
   const list = useAsyncList({ load });
 

@@ -2,6 +2,7 @@ import { Container, Grid, Spacer } from '@nextui-org/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { InputForm } from '../../shared/common/InputForm';
 import { SubmitButton } from '../../shared/common/SubmitButton';
+import { useAsyncListStore } from '../../shared/hooks/useAsyncListStore';
 import { AuthorModel } from '../models/author';
 import { saveAuthor } from '../services/saveAuthor';
 
@@ -11,6 +12,8 @@ const AuthorForm = () => {
         reValidateMode: 'onChange',
     });
 
+    const {reloadList} = useAsyncListStore();
+    
     const handleSubmit = authorForm.handleSubmit(async (event) => {
         let resp: any = {};
 
@@ -24,9 +27,8 @@ const AuthorForm = () => {
 
         if(resp != null){
             authorForm.reset();
+            reloadList();
         }
-
-        window.location.reload();
     });
 
     return (
